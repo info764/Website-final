@@ -31,9 +31,9 @@
     section {
       margin-bottom: 2rem;
       background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     h2 {
       margin-top: 0;
@@ -45,6 +45,7 @@
       margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-family: inherit;
     }
     form button {
       padding: 0.75rem 1.25rem;
@@ -64,8 +65,28 @@
       color: white;
       margin-top: 2rem;
     }
-    form input, form textarea {
-      font-family: inherit; /* ensures consistency with inputs */
+    /* Image styling for gallery */
+    #photos img {
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    #photos .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    /* Contact links */
+    .contact-links a {
+      color: #2f4f4f;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    .contact-links a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -77,8 +98,8 @@
   </header>
 
   <div class="container">
-      <section id="about" style="padding: 40px 20px; max-width: 900px; margin: auto;">
-      <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <!-- About Us -->
+    <section id="about">
       <h2>About Us</h2>
       <p>
         At Concrete Crack Repair, we specialize in restoring strength, safety, 
@@ -88,19 +109,18 @@
       </p>
     </section>
 
-    <section id="photos" style="text-align:center; padding: 40px 0; background-color: #f9f9f9;">
+    <!-- Photo Gallery -->
+    <section id="photos">
       <h2>Our Work</h2>
-      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
-        <img src="images/photo1.jpg" alt="Project 1" 
-             style="width: 250px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
-        <img src="images/photo2.jpg" alt="Project 2" 
-             style="width: 250px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
-        <img src="images/photo3.jpg" alt="Project 3" 
-             style="width: 250px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
+      <div class="gallery">
+        <img src="images/photo1.jpg" alt="Project 1">
+        <img src="images/photo2.jpg" alt="Project 2">
+        <img src="images/photo3.jpg" alt="Project 3">
       </div>
     </section>
     
-    <section>
+    <!-- Why Repair -->
+    <section id="why-repair">
       <h2>Why Repair Cracks?</h2>
       <p>
         Small cracks can quickly turn into big problems. Water seepage, freeze-thaw 
@@ -108,12 +128,16 @@
         repair prevents costly structural issues, improves safety, and extends the 
         life of your concrete.
       </p>
-          </section>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="text-align: center;">
       <h2>Call or text us for a free quote:</h2>
-        <p>
-          <a href="tel:+12899813178">(289) 981-3178</a><br>
-          <a href="mailto:info@concretecracks.ca">info@concretecracks.ca</a>
-        </p>
+      <p class="contact-links">
+        <a href="tel:+12899813178">(289) 981-3178</a><br>
+        <a href="mailto:info@concretecracks.ca">info@concretecracks.ca</a>
+      </p>
+
       <form id="contactForm">
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
@@ -121,10 +145,10 @@
         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
         <button type="submit">Send Message</button>
       </form>
-      
 
-      
-      <p><em>Note: This form is a placeholder — backend setup needed to receive messages.</em></p>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #555;">
+        <em>Note: This form is a placeholder — backend setup needed to receive messages.</em>
+      </p>
     </section>
   </div>
 
