@@ -1,44 +1,53 @@
-import nodemailer from "nodemailer";
+// api/contact.js
 const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", ["POST"]);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Only POST allowed' });
   }
 
-  const { name, email, phone, message } = req.body;
+  const { name, email, message } = req.body;
 
+  // Basic validation
   if (!name || !email || !message) {
-    return res.status(400).json({ success: false, message: "Missing required fields" });
+    return res.status(400).json({ error: 'Missing required fields' });
   }
 
   try {
-    // create transporter
+    // Set up Nodemailer transporter with Gmail
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: 'smtp.gmail.com',
+      port: 465,  // Use 465 for SSL (secure) or 587 for TLS
+      secure: true,  // true for 465, false for 587
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
-    // send mail
-    await transporter.sendMail({
-      from: `"Concrete Crack Repair" <${process.env.EMAIL_USER}>`,
-      to: process.env.NOTIFY_EMAIL,
-      subject: "New Contact Form Submission",
-      text: `
-Name: ${name}
-Email: ${email}
-Phone: ${phone || "N/A"}
-Message: ${message}
-      `
-    });
+    // Email options
+    const mailOptions = {
+      from: `${name} <${process.env.EMAIL_USER}>`,  // Sender (your Gmail)
+      to: process.env.NOTIFY_EMAIL,  // Recipient (you)
+      replyTo: email,  // User's email for easy reply
+      subject: `New contact from ${name}`,
+      text: `From: ${name} (${email})\n\nMessage:\n${message}`,  // Plain text version
+      html: `
+        <h1>New Message</h1>
+        <p><strong>From:</strong> ${name} (${email})</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,  // HTML version
+    };
 
-    return res.status(200).json({ success: true, message: "Form submitted successfully!" });
+    // Send the email
+    await transporter.sendMail(mailOptions);
+
+    // Success: Redirect to thank-you page
+    res.setHeader('Location', '/thank-you.html');
+    return res.status(302).end();
   } catch (error) {
-    console.error("Error sending email:", error);
-    return res.status(500).json({ success: false, message: "Failed to send email" });
+    console.error('Email error:', error);
+    return res.status(500).json({ error: 'Failed to send email' });
   }
 }
