@@ -1,5 +1,7 @@
 {
-  "name": "concrete-crack-repair",
+  "name": "Concrete Crack Repairs",  // Change to whatever, or keep as-is
   "version": "1.0.0",
-  "private": true
+  "dependencies": {
+    "nodemailer": "^6.9.15"
+  }
 }
