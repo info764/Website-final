@@ -77,7 +77,8 @@
   </header>
 
   <div class="container">
-    <section>
+      <section id="about" style="padding: 40px 20px; max-width: 900px; margin: auto;">
+      <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
       <h2>About Us</h2>
       <p>
         At Concrete Crack Repair, we specialize in restoring strength, safety, 
@@ -108,7 +109,11 @@
         life of your concrete.
       </p>
           </section>
-      
+      <h2>Call or text us for a free quote:</h2>
+        <p>
+          <a href="tel:+12899813178">(289) 981-3178</a><br>
+          <a href="mailto:info@concretecracks.ca">info@concretecracks.ca</a>
+        </p>
       <form id="contactForm">
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="email" placeholder="Your Email" required />
@@ -117,20 +122,6 @@
         <button type="submit">Send Message</button>
       </form>
       
-      <script>
-      document.getElementById("contactForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
-        const formData = Object.fromEntries(new FormData(this).entries());
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
-        const result = await res.json();
-        alert(result.message || "Form submitted!");
-      });
-      </script>
-
 
       
       <p><em>Note: This form is a placeholder — backend setup needed to receive messages.</em></p>
