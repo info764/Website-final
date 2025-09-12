@@ -116,19 +116,19 @@
       </form>
       
       <script>
-  document.getElementById("contactForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
+      document.getElementById("contactForm").addEventListener("submit", async function(e) {
+        e.preventDefault(); // prevent normal form submission (GET)
         const formData = Object.fromEntries(new FormData(this).entries());
-
+      
         const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+          method: "POST",                 // must be POST
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
         });
-
+      
         const result = await res.json();
         alert(result.message || "Form submitted!");
-        });
+      });
       </script>
 
       
