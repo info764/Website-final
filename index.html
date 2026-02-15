@@ -88,8 +88,54 @@
     .contact-links a:hover {
       text-decoration: underline;
     }
+   
+    
+    
+    /* ===== Carousel ===== */
+  .carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 20px auto 0;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+
+  .carousel-track img {
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 22px;
+    border-radius: 4px;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(0,0,0,0.8);
+  }
+
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
+ 
   </style>
 </head>
+
+
+  
 <body>
   <header>
     <img src="logo.png" alt="Concrete Crack Repair Logo" />
@@ -144,6 +190,33 @@
 
   <footer>
     <p>&copy; 2025 Concrete Crack Repair. All rights reserved.</p>
+  
+  
   </footer>
-</body> 
+</footer>
+
+<script>
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextBtn = document.querySelector('.carousel-btn.next');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+
+let index = 0;
+
+function updateCarousel() {
+  track.style.transform = 'translateX(-' + index * 100 + '%)';
+}
+
+nextBtn.addEventListener('click', () => {
+  index = (index + 1) % slides.length;
+  updateCarousel();
+});
+
+prevBtn.addEventListener('click', () => {
+  index = (index - 1 + slides.length) % slides.length;
+  updateCarousel();
+});
+</script>
+
+</body>
 </html>
